@@ -17,7 +17,7 @@ mongoose.set("strictQuery", false);
 
 mongoose
   .connect(
-    "mongodb+srv://santosh:<password>@cluster0.iwqqdfo.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://santosh:Nehitha@cluster0.iwqqdfo.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => console.log("Db connected"));
 
@@ -43,11 +43,20 @@ app.get("/read", async (req, res) => {
   }
 });
 
-app.use("/delete/:id", async (req, res) => {
+app.delete("/delete/:id", async (req, res) => {
   try {
     await TodoSchema.findByIdAndDelete(req.params.id);
 
     return res.json(await TodoSchema.find());
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+app.delete("/deleteall", async (req, res) => {
+  try {
+    await TodoSchema.deleteMany(req.params.id);
+    return res.json(await TodoSchema.deleteMany());
   } catch (error) {
     console.log(error.message);
   }
