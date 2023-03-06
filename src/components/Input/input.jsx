@@ -14,18 +14,24 @@ const InputValue = function () {
     fetchData();
   }, []);
 
+  const inputHandler = (e) => {
+    setNewtask(e.target.value);
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:8000/data", { todo: newTask })
       .then((arr) => setTodo(arr.data));
-
-    set;
   };
   const deleteHandler = (id) => {
     axios
       .delete(`http://localhost:8000/delete/${id}`)
       .then((arr) => setTodo(arr.data));
+  };
+
+  const clearAll = () => {
+    axios.delete(`http://localhost:8000/deleteall`).then(() => setTodo([]));
   };
   return (
     <Fragment>
@@ -35,12 +41,16 @@ const InputValue = function () {
             type="text"
             placeholder="add your work here..."
             value={newTask}
-            onChange={(e) => setNewtask(e.target.value)}
+            onChange={inputHandler}
+            autoFocus
           />
           <button type="submit" value="Submit">
-            +Add
+            OK
           </button>
         </form>
+      </div>
+      <div className="tasks">
+        <h6>Add your tasks:</h6>
       </div>
       <div className="ui">
         <ul>
@@ -51,11 +61,16 @@ const InputValue = function () {
                 className="delete"
                 onClick={() => deleteHandler(task._id)}
               >
-                delete
+                Delete
               </button>
             </li>
           ))}
         </ul>
+      </div>
+      <div>
+        <button className="clear" onClick={clearAll}>
+          clear all
+        </button>
       </div>
     </Fragment>
   );

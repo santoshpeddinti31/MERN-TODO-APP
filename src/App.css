@@ -1,0 +1,23 @@
+body {
+  background-image: url("./wave.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.logo {
+  margin-left: 3rem;
+  color: rgb(142, 129, 225);
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 10px 5px rgba(0, 0, 0, 0.2);
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.4rem;
+}
+.logo h5 {
+  font-size: 1.5rem;
+}
